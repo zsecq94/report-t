@@ -275,6 +275,7 @@ function buildReportHTML(
         margin: 0 auto;
         table-layout: fixed;
         border: 1px solid #c1c7d0;
+        margin-bottom: 20px;
       "
     >
       <tbody>
