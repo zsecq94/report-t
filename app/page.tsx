@@ -702,6 +702,8 @@ export default function DailyReportPage() {
     setTimeout(() => {
       setName(localStorage.getItem("name") || "");
       setRank(localStorage.getItem("rank") || "");
+      setWorkItems(JSON.parse(localStorage.getItem("workItems") || "[]"));
+      setSpecialItems(JSON.parse(localStorage.getItem("specialItems") || "[]"));
     }, 100);
   }, []);
 
@@ -766,6 +768,8 @@ export default function DailyReportPage() {
 
     localStorage.setItem("name", name);
     localStorage.setItem("rank", rank);
+    localStorage.setItem("workItems", JSON.stringify(workItems));
+    localStorage.setItem("specialItems", JSON.stringify(specialItems));
 
     const html = reportBody;
     const blob = new Blob([html], { type: "text/html;charset=utf-8" });
