@@ -341,7 +341,7 @@ function buildReportHTML(
               border: 1px solid #c1c7d0;
               padding: 20px;
               vertical-align: top;
-              min-height: 80px;
+              height: 100px;
             "
           >
             ${specialRows}
