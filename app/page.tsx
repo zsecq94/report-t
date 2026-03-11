@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 /* ──────────────────────────────────────────
    Types
@@ -688,19 +688,22 @@ function Panel({
    Page
 ────────────────────────────────────────── */
 export default function DailyReportPage() {
-  const [name, setName] = useState("배중권");
-  const [rank, setRank] = useState("사원");
+  const [name, setName] = useState("");
+  const [rank, setRank] = useState("");
   const [date] = useState(getTodayString());
   const [checkin, setCheckin] = useState("09:00");
   const [checkout, setCheckout] = useState("18:00");
 
-  const [workItems, setWorkItems] = useState<WorkItem[]>([
-    { title: "첫번째 업무내용", detail: "첫번째 업무내용 상세", progress: 30 },
-  ]);
+  const [workItems, setWorkItems] = useState<WorkItem[]>([]);
 
-  const [specialItems, setSpecialItems] = useState<string[]>([
-    "첫번째 특이사항",
-  ]);
+  const [specialItems, setSpecialItems] = useState<string[]>([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setName(localStorage.getItem("name") || "");
+      setRank(localStorage.getItem("rank") || "");
+    }, 100);
+  }, []);
 
   /* ── preview HTML ── */
   const previewHTML = useCallback(
@@ -760,6 +763,9 @@ export default function DailyReportPage() {
       workItems,
       specialItems
     );
+
+    localStorage.setItem("name", name);
+    localStorage.setItem("rank", rank);
 
     const html = reportBody;
     const blob = new Blob([html], { type: "text/html;charset=utf-8" });
